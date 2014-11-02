@@ -1,0 +1,8 @@
+Debug/
+Release/
+x86/
+x64/
+obj/
+*.sdf
+*.suo
+*.ipch
