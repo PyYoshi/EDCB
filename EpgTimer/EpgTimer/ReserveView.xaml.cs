@@ -37,6 +37,7 @@ namespace EpgTimer
         private CtrlCmdUtil cmd = CommonManager.Instance.CtrlCmd;
 
         MainWindow _mainWindow;
+        PopupWindow _popupWindow;
 
         public ReserveView()
         {
@@ -145,6 +146,7 @@ namespace EpgTimer
                 }
             }
             this._mainWindow = (MainWindow)Window.GetWindow(this);
+            this._popupWindow = new PopupWindow(Window.GetWindow(this));
         }
 
         /// <summary>
@@ -685,6 +687,9 @@ namespace EpgTimer
             {
                 switch (e.Key)
                 {
+                    case Key.F2:
+                        this.MenuItem_Click_Google(this, new RoutedEventArgs(Button.ClickEvent));
+                        break;
                     case Key.F3:
                         this.MenuItem_Click_ProgramTable(this, new RoutedEventArgs(Button.ClickEvent));
                         break;
@@ -787,6 +792,15 @@ namespace EpgTimer
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + "\r\n" + ex.StackTrace);
+            }
+        }
+
+        private void MenuItem_Click_Google(object sender, RoutedEventArgs e)
+        {
+            ReserveItem item1 = this.listView_reserve.SelectedItem as ReserveItem;
+            if (item1 != null)
+            {
+                this._popupWindow.google(item1.EventName);
             }
         }
 

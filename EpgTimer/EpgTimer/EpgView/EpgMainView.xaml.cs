@@ -479,6 +479,11 @@ namespace EpgTimer
                 MenuItem menuItemAutoAdd = new MenuItem();
                 menuItemAutoAdd.Header = "自動予約登録";
                 menuItemAutoAdd.Click += new RoutedEventHandler(cm_autoadd_Click);
+
+                MenuItem menuItemGoogle = new MenuItem();
+                menuItemGoogle.Header = "番組名でググる (_G)";
+                menuItemGoogle.Click += new RoutedEventHandler(cm_google_Click);
+
                 MenuItem menuItemTimeshift = new MenuItem();
                 menuItemTimeshift.Header = "追っかけ再生 (_P)";
                 menuItemTimeshift.Click += new RoutedEventHandler(cm_timeShiftPlay_Click);
@@ -528,6 +533,7 @@ namespace EpgTimer
                     menuItemAdd.IsEnabled = false;
                     menuItemChg.IsEnabled = false;
                     menuItemDel.IsEnabled = false;
+                    menuItemGoogle.IsEnabled = false;
                     menuItemAutoAdd.IsEnabled = false;
                     menuItemTimeshift.IsEnabled = false;
                     menuItemView.IsEnabled = true;
@@ -543,6 +549,7 @@ namespace EpgTimer
                         ((MenuItem)menuItemChgRecPri.Items[Math.Min((int)(reserve.RecSetting.Priority - 1), 4)]).IsChecked = true;
                         menuItemChgRecPri.Header = string.Format((string)menuItemChgRecPri.Tag, reserve.RecSetting.Priority);
                         menuItemDel.IsEnabled = true;
+                        menuItemGoogle.IsEnabled = true;
                         menuItemAutoAdd.IsEnabled = true;
                         menuItemTimeshift.IsEnabled = true;
                         menuItemView.IsEnabled = true;
@@ -553,6 +560,7 @@ namespace EpgTimer
                         menuItemAdd.IsEnabled = true;
                         menuItemChg.IsEnabled = false;
                         menuItemDel.IsEnabled = false;
+                        menuItemGoogle.IsEnabled = true;
                         menuItemAutoAdd.IsEnabled = true;
                         menuItemTimeshift.IsEnabled = false;
                         menuItemView.IsEnabled = true;
@@ -564,6 +572,7 @@ namespace EpgTimer
                 menu.Items.Add(menuItemChg);
                 menu.Items.Add(menuItemDel);
                 menu.Items.Add(menuItemAutoAdd);
+                menu.Items.Add(menuItemGoogle);
                 menu.Items.Add(menuItemTimeshift);
                 menu.Items.Add(menuItemView);
                 menu.IsOpen = true;
@@ -865,6 +874,36 @@ namespace EpgTimer
             }
         }
 
+
+        /// <summary>
+        /// 右クリックメニュー 番組名でググるイベント呼び出し
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cm_google_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (sender.GetType() != typeof(MenuItem))
+                {
+                    return;
+                }
+
+                EpgEventInfo program = new EpgEventInfo();
+                if (GetProgramItem(clickPos, ref program) == false)
+                {
+                    return;
+                }
+                PopupWindow _popupWindow　= new PopupWindow(Window.GetWindow(this));
+                _popupWindow.google(program.ShortInfo.event_name);
+                _popupWindow.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\r\n" + ex.StackTrace);
+            }
+        }
+        
         /// <summary>
         /// 右クリックメニュー 簡易予約イベント呼び出し
         /// </summary>

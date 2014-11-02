@@ -34,6 +34,8 @@ namespace EpgTimer
 
         private UInt32 autoAddID = 0;
 
+        PopupWindow _popupWindow;
+
         public SearchWindow()
         {
             InitializeComponent();
@@ -575,6 +577,7 @@ namespace EpgTimer
             {
                 this.SearchPg();
             }
+            this._popupWindow = new PopupWindow(this);
         }
 
         void listView_result_KeyDown(object sender, KeyEventArgs e)
@@ -740,6 +743,15 @@ namespace EpgTimer
                 searchKeyView.SetSearchKey(defKey);
 
                 button_search_Click(sender, e);
+            }
+        }
+		
+		private void MenuItem_Click_Google(object sender, RoutedEventArgs e)
+        {
+            SearchItem item1 = this.listView_result.SelectedItem as SearchItem;
+            if (item1 != null)
+            {
+                this._popupWindow.google(item1.EventName);
             }
         }
 

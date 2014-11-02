@@ -1266,6 +1266,29 @@ namespace EpgTimer
         }
 
         /// <summary>
+        /// 右クリックメニュー 番組名でググるイベント呼び出し
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cm_google_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                List<UInt32> list = new List<UInt32>();
+                foreach (SearchItem item in listView_event.SelectedItems)
+                {
+                    PopupWindow _popupWindow = new PopupWindow(Window.GetWindow(this));
+                    _popupWindow.google(item.EventName);
+                    _popupWindow.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\r\n" + ex.StackTrace);
+            }
+        }
+
+        /// <summary>
         /// 右クリックメニュー 簡易予約イベント呼び出し
         /// </summary>
         /// <param name="sender"></param>

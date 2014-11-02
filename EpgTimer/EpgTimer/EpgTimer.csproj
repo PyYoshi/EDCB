@@ -124,6 +124,9 @@
     </Compile>
     <Compile Include="DefineClass\CoopServerInfo.cs" />
     <Compile Include="DefineClass\ListColumnInfo.cs" />
+    <Compile Include="PopupWindow.xaml.cs">
+      <DependentUpon>PopupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SetCoopSrvWindow.xaml.cs">
       <DependentUpon>SetCoopSrvWindow.xaml</DependentUpon>
     </Compile>
@@ -283,7 +286,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="ConnectWindow.xaml">
+	<Page Include="PopupWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+	<Page Include="ConnectWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

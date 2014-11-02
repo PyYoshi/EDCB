@@ -41,6 +41,7 @@
                     <MenuItem Header="5 (_5)" Name="priority_5" Click="priority_Click" />
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="番組名でググる (_G)" Click="MenuItem_Click_Google" InputGestureText="F2" />
             <MenuItem Header="番組表へジャンプ" Click="MenuItem_Click_ProgramTable"  InputGestureText="F3" />
             <MenuItem Header="自動予約登録" Click="autoadd_Click" />
             <MenuItem Header="追っかけ再生" Click="timeShiftPlay_Click" InputGestureText="Ctrl + P" />
